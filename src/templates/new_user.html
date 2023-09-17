@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='icon.ico') }}" type="image/x-icon">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fooy - home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 class="fooy">FOOY</h1>
+
+    
+
+    <div>
+        <form action="/handle_user" method="post">
+            <center><h1 style="font-size: 20px;">Pro používání FOOY si vytvoř účet!</h1></center>
+            <label for="namae">Jméno:</label>
+            <input type="text" id="namae" name="namae" required>
+            <br>
+            {% if name %}
+                <p>{{ name }} je už zaregistrované!</p>
+            {% endif %}
+            <br>
+            <input type="submit" value="Odeslat" class="send">
+    
+    
+        </form>
+    </div>
+
+    
+
+</body>
+</html>

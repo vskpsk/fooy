@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='icon.ico') }}" type="image/x-icon">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fooy - home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 class="fooy">FOOY</h1>
+    <center><button id="new_post" class="nww">Nový příspěvek</button><center>
+
+    
+
+    <div style="display: none;" id="divv">
+        <form action="/handle_post" method="post" enctype="multipart/form-data">
+            <label for="nazev">Název:</label>
+            <input type="text" id="title" name="title" required>
+    
+            <br>
+            <br>
+            <label for="obsah">Obsah:</label>
+            <br>
+            <textarea id="content" name="content" rows="15" cols="50" required></textarea>
+            <br>
+            <br>
+            <input type="file" id="photo" name="photo" accept="image/*">
+            <br>
+            <input type="submit" value="Odeslat" class="send">
+    
+    
+        </form>
+    </div>
+
+    <center>
+        {% for post in posts %}
+            <div>
+                <h1 class="title">{{ post.title }}</h1>
+                <br>
+                <h2>{{ post.content }}</h2>
+                <br>
+                {% if post.photo %}
+                    <img class="img-post" src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="{{ post.title }}">
+                {% endif %}
+                <p>{{ post.author }}</p>
+            </div>
+        {% endfor %}
+
+    </center>
+
+    <script>
+        document.getElementById("new_post").addEventListener("click", function() {
+          document.getElementById("divv").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
