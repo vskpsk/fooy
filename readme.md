@@ -26,6 +26,10 @@ posts.json - ukládá všechny posty
 ![chyba](./screenshot.png)
 
 
+#
+
+Verze 1.1 - opravena duplikace obrázků
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

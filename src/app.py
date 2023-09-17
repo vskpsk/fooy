@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import json
 from datetime import datetime
+import random
 
 def load_json(filename, default_value):
     try:
@@ -21,6 +22,7 @@ def allowed_file(filename):
 
 users = load_json('users.json', ["admin"])
 posts = load_json('posts.json', [{"title": "Test", "author": "vskpsk", "content": "Tohle je testovaci post!"}])
+images = load_json('images.json', ["00000000000000.jpg"])
 
 
 @app.route('/')
@@ -61,8 +63,18 @@ def handle_post():
     content = request.form['content']
     photo = request.files['photo']
 
+    generating = True
+    name = ""
+
+    while generating:
+        name = str(random.randint(10000000000000,99999999999999))+".jpg"
+        if name in images:
+            continue
+        else:
+            generating = False
+
     if photo and allowed_file(photo.filename):
-        filename = secure_filename(photo.filename)
+        filename = name
         photo_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         photo.save(photo_path)
         posts.insert(0, {'title': title, 'author': author, 'content': content, 'photo': filename})
